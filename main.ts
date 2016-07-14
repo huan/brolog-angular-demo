@@ -8,11 +8,12 @@ const log = new Brolog()
 @Component({
   selector: 'test-log'
   , template: `
-  <h1>BroLog &amp; Angular Demo</h1>
-  <a href="https://github.com/zixia/brolog" target="_blank">BroLog Project on Github</a>
-  |
-  <a href="https://github.com/zixia/brolog-angular-demo/blob/master/main.ts" target="_blank">Source Code of This Component</a>
-  <br />
+  <h1 align="center">BroLog &amp; Angular Demo</h1>
+  <div align="center">
+    <a href="https://github.com/zixia/brolog" target="_blank">BroLog Project on Github</a>
+    |
+    <a href="https://github.com/zixia/brolog-angular-demo/blob/master/main.ts" target="_blank">Source Code of This Component</a>
+  </div>
   <ol>
     <li class="line" data-line="10"><p>Support TypeScript support(typing file <a href="https://github.com/zixia/brolog/blob/master/index.d.ts">index.d.ts</a>).</p></li>
     <li class="line" data-line="11"><p>Support Angular2 &amp; SystemJS(demo project <a href="https://github.com/zixia/brolog-angular-demo">git repository</a>)</p></li>
@@ -25,7 +26,9 @@ const log = new Brolog()
 
   <hr />
 
-  <button (click)="test()">Click me, Then see console log</button>
+  <div align="center">
+    <button (click)="test()">Click me, Then see console log</button>
+  </div>
   `
 })
 
