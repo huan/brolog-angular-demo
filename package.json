@@ -13,6 +13,7 @@
   "homepage": "https://github.com/zixia/brolog-angular-demo#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+    , "start": "lite-server"
   },
   "keywords": [
     "brolog"
