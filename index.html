@@ -1,0 +1,55 @@
+<html>
+<head>
+<script src="node_modules/zone.js/dist/zone.js"></script>
+<script src="node_modules/reflect-metadata/Reflect.js"></script>
+<script src="node_modules/systemjs/dist/system.js"></script>
+<script src="https://code.angularjs.org/tools/typescript.js"></script>
+</script>
+<script>
+System.config({
+  transpiler: 'typescript', 
+  typescriptOptions: { emitDecoratorMetadata: true }, 
+
+  map: {
+    app: 'main.ts'
+    , brolog: 'node_modules/brolog/index.js'
+    , typescript: 'node_modules/typescript/lib/typescript.js'
+    , '@angular': 'node_modules/@angular'
+    , rxjs: 'node_modules/rxjs'
+
+  }
+  , packages: {
+    '@angular/core': {
+      main: 'index'
+      , defaultExtension: 'js'
+    }
+    , '@angular/platform-browser': {
+      main: 'index'
+    }
+    , '@angular/platform-browser-dynamic': {
+      main: 'index'
+    }
+     , '@angular/common': {
+      main: 'index'
+    }
+    , '@angular/compiler': {
+      main: 'index'
+    }
+    , 'rxjs': {
+      main: 'index'
+    }
+  }
+})
+System.import('app')
+.then(function () {
+    console.log('imported')
+})
+.catch(console.error.bind(console))
+
+</script>
+
+</head>
+<body>
+<test-log>Test Log!</test-log>
+</body>
+</html>
