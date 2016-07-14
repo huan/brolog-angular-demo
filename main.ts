@@ -1,6 +1,9 @@
 import { Component } from '@angular/core'
 import { bootstrap } from '@angular/platform-browser-dynamic'
-import { brolog as log } from 'brolog'
+import { Brolog } from 'brolog'
+
+const log = new Brolog()
+// const log = Brolog // <- this will work too
 
 @Component({
   selector: 'test-log'
