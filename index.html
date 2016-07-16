@@ -1,23 +1,22 @@
 <html>
 <head>
-<title>BroLog & Angular DEMO - BroLog is a NpmLog like logger for Browser</title>
+<title>BroLog &amp; Angular DEMO - BroLog is a NpmLog like logger for Browser</title>
 <script src="node_modules/zone.js/dist/zone.js"></script>
 <script src="node_modules/reflect-metadata/Reflect.js"></script>
 <script src="node_modules/systemjs/dist/system.js"></script>
-<script src="https://code.angularjs.org/tools/typescript.js"></script>
-</script>
+<script src='node_modules/typescript/lib/typescript.js'></script>
 <script>
 System.config({
-  transpiler: 'typescript', 
-  typescriptOptions: { emitDecoratorMetadata: true }, 
-
-  map: {
+  transpiler: 'typescript'
+  , typescriptOptions: {
+    emitDecoratorMetadata: true
+  }
+  ,map: {
     app: 'main.ts'
     , brolog: 'node_modules/brolog/index.js'
     , typescript: 'node_modules/typescript/lib/typescript.js'
     , '@angular': 'node_modules/@angular'
     , rxjs: 'node_modules/rxjs'
-
   }
   , packages: {
     '@angular/core': {
@@ -30,7 +29,7 @@ System.config({
     , '@angular/platform-browser-dynamic': {
       main: 'index'
     }
-     , '@angular/common': {
+    , '@angular/common': {
       main: 'index'
     }
     , '@angular/compiler': {
@@ -42,8 +41,8 @@ System.config({
   }
 })
 System.import('app')
-.then(function () {
-    console.log('imported')
+.then(function() {
+  console.log('imported')
 })
 .catch(console.error.bind(console))
 

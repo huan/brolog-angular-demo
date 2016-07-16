@@ -39,3 +39,4 @@ jspm_packages
 .*.swp
 typings/
 dist/
+t/

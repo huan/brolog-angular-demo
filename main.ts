@@ -1,9 +1,13 @@
-import { Component } from '@angular/core'
+import {
+  Component
+  , OpaqueToken
+  , Injectable
+  , Inject
+  , provide
+} from '@angular/core'
 import { bootstrap } from '@angular/platform-browser-dynamic'
-import { Brolog } from 'brolog'
 
-const log = new Brolog()
-// const log = Brolog // <- this will work too
+import { Brolog } from 'brolog'
 
 @Component({
   selector: 'test-log'
@@ -30,42 +34,60 @@ const log = new Brolog()
     <button (click)="test()">Click me, Then see console log</button>
   </div>
   `
+  , providers: []
 })
 
-export class LogApp {
-  constructor() {
+class LogApp {
+  constructor(
+    @Inject(Brolog) private log
+  ) {
+    log.verbose('LogApp', 'constructor()')
+
+    console.log('######### start doLog with default Level: %s #########', log.defaultLevel())
+    this.doLog(log, 'Brolog')
+    console.log('######### end doLog with default Level: %s #########', log.defaultLevel())
+
     this.test()
   }
 
   test() {
 
-    console.log('#### Set Level to SILLY ####')
-    log.level('SILLY')
-    this.doLog()
+    console.log('######### Start BroLog Test #########')
 
-    log.level('INFO')
-    console.log('#### Set Level to INFO ####')
-    this.doLog()
+    const loggerList = [
+          [Brolog, 'raw Brolog']
+      , [this.log, 'injected Brolog']
+    ]
+    
+    const levels = [
+      'ERROR'
+      , 'WARN'
+      , 'INFO'
+      , 'VERBOSE'
+      , 'SILLY'
+    ]
 
-    console.log('#### Set Level to ERR ####')
-    log.level('ERR')
-    this.doLog()
-
-    console.log('#### Set Level to SILENT ####')
-    log.level('SILENT')
-    this.doLog()
-
-    console.log('#### BroLog Test Done ####')
+    loggerList.forEach(([logger, loggerName]) => {
+      levels.forEach(level => {
+        console.log('#### Logger(%s) Set Level to %s ####', loggerName, level)
+        logger.level(level)
+        this.doLog(logger, loggerName)
+      })
+    })
+    
+    console.log('######### End BroLog Test #########')
 
   }
 
-  doLog() {
-    log.error('LogApp', 'error')
-    log.warn('LogApp', 'warn')
-    log.info('LogApp', 'info')
-    log.verbose('LogApp', 'verbose')
-    log.silly('LogApp', 'silly')
+  doLog(logger: Brolog, loggerName) {
+    logger.error('LogApp', 'error')
+    logger.warn('LogApp', 'warn')
+    logger.info('LogApp', 'info')
+    logger.verbose('LogApp', 'verbose')
+    logger.silly('LogApp', 'silly')
   }
 }
 
-bootstrap(LogApp)
+bootstrap(LogApp, [
+  Brolog.factory('VERBOSE')
+])
