@@ -37,6 +37,15 @@ class BrologApp {
      */
     log.verbose('LogApp', 'constructor()')
 
+    /**
+     *
+     * this message `THIS_MESSAGE_MEANS_BROLOG_ANGULAR_GOOD`
+     * is used by brolog End to End test:
+     * https://github.com/zixia/brolog/tree/master/test/e2e
+     *
+     */
+    log.error('LogApp', 'THIS_MESSAGE_MEANS_BROLOG_ANGULAR_GOOD')
+
     console.log('######### start doLog with default Level: %s #########', log.defaultLevel())
     this.doLog(log, 'Brolog')
     console.log('######### end doLog with default Level: %s #########', log.defaultLevel())
