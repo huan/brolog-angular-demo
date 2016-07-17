@@ -3,7 +3,7 @@ brolog with angular2 DEMO
 
 BroLog is a NpmLog like Logger for Browser.
 
-More Detail - BroLog HomePage: [Github](https://github.com/zixia/brolog)
+BroLog repository: [Github](https://github.com/zixia/brolog)
 
 # How to Run
 
@@ -15,4 +15,4 @@ $ npm install
 $ npm start
 ```
 
-then visit `http://localhost:3000` for demo.
+lite-server will open `http://localhost:3000` for demo automatically.

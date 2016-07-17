@@ -5,6 +5,7 @@
 <script src="node_modules/reflect-metadata/Reflect.js"></script>
 <script src="node_modules/systemjs/dist/system.js"></script>
 <script src='node_modules/typescript/lib/typescript.js'></script>
+
 <script>
 System.config({
   transpiler: 'typescript'
@@ -35,6 +36,9 @@ System.config({
     , '@angular/compiler': {
       main: 'index'
     }
+    , '@angular/http': {
+      main: 'index'
+    }
     , 'rxjs': {
       main: 'index'
     }
@@ -42,14 +46,17 @@ System.config({
 })
 System.import('app')
 .then(function() {
-  console.log('imported')
+  console.log('Brolog System JS import succed')
 })
 .catch(console.error.bind(console))
-
 </script>
+
+
 
 </head>
   <body>
-    <test-log>BroLog &amp; Angular2 Demo is Loading...</test-log>
+
+    <brolog-app>BroLog &hearts; Angular2 Demo is Loading...</brolog-app>
+
   </body>
 </html>

@@ -1,53 +1,45 @@
 import {
   Component
-  , OpaqueToken
-  , Injectable
-  , Inject
-  , provide
+  , ViewEncapsulation
 } from '@angular/core'
+
 import { bootstrap } from '@angular/platform-browser-dynamic'
 
+/**
+ *
+ * Brolog & Angular STEP 1: import Brolog
+ *
+ */
 import { Brolog } from 'brolog'
 
 @Component({
-  selector: 'test-log'
-  , template: `
-  <h1 align="center">BroLog &amp; Angular Demo</h1>
-  <div align="center">
-    <a href="https://github.com/zixia/brolog" target="_blank">BroLog Project on Github</a>
-    |
-    <a href="https://github.com/zixia/brolog-angular-demo/blob/master/main.ts" target="_blank">Source Code of This Component</a>
-  </div>
-  <ol>
-    <li class="line" data-line="10"><p>Support TypeScript support(typing file <a href="https://github.com/zixia/brolog/blob/master/index.d.ts">index.d.ts</a>).</p></li>
-    <li class="line" data-line="11"><p>Support Angular2 &amp; SystemJS(demo project <a href="https://github.com/zixia/brolog-angular-demo">git repository</a>)</p></li>
-    <li class="line" data-line="12"><p>Support show <strong>real</strong> line number in browser console.</p>
-      <blockquote class="line" data-line="13"><p>What I really get frustrated by is that I cannot wrap console.* and preserve line numbers</p>
-      </blockquote>
-      <p><a href="https://gist.github.com/paulirish/c307a5a585ddbcc17242">We enabled this in Chrome DevTools via blackboxing a bit ago.</a></p></li>
-    <li class="line" data-line="16"><p>Also can be used with nodejs(example <a href="https://github.com/zixia/brolog/blob/master/example/npm-like-logger.js">here</a>)</p></li>
-  </ol>
-
-  <hr />
-
-  <div align="center">
-    <button (click)="test()">Click me, Then see console log</button>
-  </div>
-  `
-  , providers: []
+  selector: 'brolog-app'
+  , templateUrl: 'brolog-app.component.html'
+  ,encapsulation: ViewEncapsulation.None
 })
 
-class LogApp {
+class BrologApp {
+  private sourceCode: string
+
+  /**
+   *
+   * Brolog & Angular STEP 2: @Inject(Brolog)
+   *
+   */
+  // @Injectable()
   constructor(
-    @Inject(Brolog) private log
+    /* @Inject(Brolog) */ private log: Brolog
   ) {
+    /**
+     *
+     * Brolog & Angular STEP 3: use it like Npmlog!
+     *
+     */
     log.verbose('LogApp', 'constructor()')
 
     console.log('######### start doLog with default Level: %s #########', log.defaultLevel())
     this.doLog(log, 'Brolog')
     console.log('######### end doLog with default Level: %s #########', log.defaultLevel())
-
-    this.test()
   }
 
   test() {
@@ -55,8 +47,8 @@ class LogApp {
     console.log('######### Start BroLog Test #########')
 
     const loggerList = [
-          [Brolog, 'raw Brolog']
-      , [this.log, 'injected Brolog']
+      [this.log, 'injected Brolog']
+      , [Brolog, 'raw Brolog']
     ]
     
     const levels = [
@@ -79,15 +71,22 @@ class LogApp {
 
   }
 
-  doLog(logger: Brolog, loggerName) {
-    logger.error('LogApp', 'error')
-    logger.warn('LogApp', 'warn')
-    logger.info('LogApp', 'info')
-    logger.verbose('LogApp', 'verbose')
-    logger.silly('LogApp', 'silly')
+  doLog(logger: Brolog, loggerName: string) {
+    logger.error('LogApp', 'error messsage from %s', loggerName)
+    logger.warn('LogApp', 'warn message from %s', loggerName)
+    logger.info('LogApp', 'info message from %s', loggerName)
+    logger.verbose('LogApp', 'verbose message from %s', loggerName)
+    logger.silly('LogApp', 'silly message from %s', loggerName)
   }
+
 }
 
-bootstrap(LogApp, [
+/**
+ *
+ * Brolog & Angular STEP 0: provide Brolog to bootstrap
+ *
+ */
+bootstrap(BrologApp, [
   Brolog.factory('VERBOSE')
+  // Brolog
 ])
