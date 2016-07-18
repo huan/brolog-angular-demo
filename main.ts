@@ -96,6 +96,6 @@ class BrologApp {
  *
  */
 bootstrap(BrologApp, [
-  Brolog.factory('VERBOSE')
+  Brolog('VERBOSE')
   // Brolog
 ])
