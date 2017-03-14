@@ -1,25 +1,30 @@
 import {
-  Component
-  , ViewEncapsulation
-} from '@angular/core'
+  Component,
+  NgModule,
+  ViewEncapsulation,
+}                                 from '@angular/core'
 
-import { bootstrap } from '@angular/platform-browser-dynamic'
+import { BrowserModule }          from '@angular/platform-browser'
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
 
 /**
  *
  * Brolog & Angular STEP 1: import Brolog
  *
  */
-import { Brolog } from 'brolog'
+import { 
+  Brolog,
+  LogLevel,
+} from 'brolog'
 
 @Component({
-  selector: 'brolog-app'
-  , templateUrl: 'brolog-app.component.html'
-  ,encapsulation: ViewEncapsulation.None
+  selector: 'brolog-app',
+  templateUrl: 'brolog-app.component.html',
+  encapsulation: ViewEncapsulation.None,
 })
 
-class BrologApp {
-  private sourceCode: string
+class BrologComponent {
+  // private sourceCode: string
 
   /**
    *
@@ -55,26 +60,27 @@ class BrologApp {
 
     console.log('######### Start BroLog Test #########')
 
-    const loggerList = [
-      [this.log, 'injected Brolog']
-      , [Brolog, 'raw Brolog']
-    ]
+    const loggerList: {[name:string]: Brolog} = {
+      'injected Brolog':  this.log,
+      'raw Brolog':       Brolog,
+    }
     
-    const levels = [
-      'ERROR'
-      , 'WARN'
-      , 'INFO'
-      , 'VERBOSE'
-      , 'SILLY'
+    const levels: LogLevel[] = [
+      'error'
+      , 'warn'
+      , 'info'
+      , 'verbose'
+      , 'silly'
     ]
 
-    loggerList.forEach(([logger, loggerName]) => {
+    for (const loggerName in loggerList) {
+      let logger = loggerList[loggerName]
       levels.forEach(level => {
         console.log('#### Logger(%s) Set Level to %s ####', loggerName, level)
         logger.level(level)
         this.doLog(logger, loggerName)
       })
-    })
+    }
     
     console.log('######### End BroLog Test #########')
 
@@ -90,12 +96,25 @@ class BrologApp {
 
 }
 
+@NgModule({
+  imports:      [ BrowserModule ],
+  declarations: [ BrologComponent ],
+  bootstrap:    [ BrologComponent ],
+  providers: [
+    {provide: Brolog, useClass: Brolog('verbose')},
+  ],
+})
+class BrologModule {}
+
 /**
  *
  * Brolog & Angular STEP 0: provide Brolog to bootstrap
  *
  */
-bootstrap(BrologApp, [
-  Brolog('VERBOSE')
-  // Brolog
-])
+platformBrowserDynamic()
+.bootstrapModule(BrologModule)
+
+//   BrologApp, [
+//   Brolog('VERBOSE')
+//   // Brolog
+// ])

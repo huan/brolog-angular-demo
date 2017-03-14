@@ -8,16 +8,24 @@
 
 <script>
 System.config({
-  transpiler: 'typescript'
+    transpiler: 'ts'
   , typescriptOptions: {
-    emitDecoratorMetadata: true
+    module: "system",
+    noImplicitAny: true,
+    tsconfig: true        
   }
-  ,map: {
-    app: 'main.ts'
+  // transpiler: 'typescript'
+  // , typescriptOptions: {
+  //   emitDecoratorMetadata: true
+  // }
+  , map: {
+      app: 'main.ts'
     , brolog: 'node_modules/brolog/index.js'
-    , typescript: 'node_modules/typescript/lib/typescript.js'
     , '@angular': 'node_modules/@angular'
     , rxjs: 'node_modules/rxjs'
+    // , typescript: 'node_modules/typescript/lib/typescript.js'
+    , typescript: "node_modules/typescript"
+    , ts: "node_modules/plugin-typescript/lib"
   }
   , packages: {
     '@angular/core': {
@@ -41,6 +49,20 @@ System.config({
     }
     , 'rxjs': {
       main: 'index'
+    }
+    , 'ts': {
+      'main': 'plugin.js'
+    }
+    , 'typescript': {
+        'main': 'lib/typescript.js'
+      , 'meta': {
+        'lib/typescript.js': {
+          'exports': 'ts'
+        }
+      }
+    }
+    , app: {
+      defaultExtension: "ts"
     }
   }
 })

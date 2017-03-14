@@ -1,15 +1,14 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es5",
-        "noImplicitAny": false,
-        "sourceMap": false
-        , "emitDecoratorMetadata": true
-        , "experimentalDecorators": true
-        , "outDir": "dist"
-    },
+  "compilerOptions": {
+      "module": "commonjs"
+    , "target": "es5"
+    , "noImplicitAny": false
+    , "sourceMap": false
+    , "emitDecoratorMetadata": true
+    , "experimentalDecorators": true
+    , "outDir": "dist"
+  },
     "files": [
-        "main.ts"
-        , "typings/globals/es6-shim/index.d.ts"
-    ]
+      "main.ts"
+  ]
 }
