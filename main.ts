@@ -1,11 +1,11 @@
-import {
-  Component,
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
+
+import { 
   NgModule,
-  ViewEncapsulation,
+  Component,
 }                                 from '@angular/core'
 
 import { BrowserModule }          from '@angular/platform-browser'
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
 
 /**
  *
@@ -18,9 +18,8 @@ import {
 } from 'brolog'
 
 @Component({
-  selector: 'brolog-app',
-  templateUrl: 'brolog-app.component.html',
-  encapsulation: ViewEncapsulation.None,
+  selector:     'brolog-app',
+  templateUrl:  'brolog-app.component.html',
 })
 
 class BrologComponent {
@@ -104,7 +103,7 @@ class BrologComponent {
     {provide: Brolog, useClass: Brolog('verbose')},
   ],
 })
-class BrologModule {}
+export class BrologModule {}
 
 /**
  *
@@ -113,8 +112,3 @@ class BrologModule {}
  */
 platformBrowserDynamic()
 .bootstrapModule(BrologModule)
-
-//   BrologApp, [
-//   Brolog('VERBOSE')
-//   // Brolog
-// ])
