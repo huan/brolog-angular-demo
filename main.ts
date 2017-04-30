@@ -14,7 +14,7 @@ import { BrowserModule }          from '@angular/platform-browser'
  */
 import { 
   Brolog,
-  LogLevel,
+  LevelName,
 } from 'brolog'
 
 @Component({
@@ -50,9 +50,9 @@ class BrologComponent {
      */
     log.error('LogApp', 'THIS_MESSAGE_MEANS_BROLOG_ANGULAR_GOOD')
 
-    console.log('######### start doLog with default Level: %s #########', log.defaultLevel())
+    console.log('######### start doLog with Level: %s #########', log.level())
     this.doLog(log, 'Brolog')
-    console.log('######### end doLog with default Level: %s #########', log.defaultLevel())
+    console.log('######### end doLog with Level: %s #########', log.level())
   }
 
   test() {
@@ -64,7 +64,7 @@ class BrologComponent {
       'raw Brolog':       Brolog,
     }
     
-    const levels: LogLevel[] = [
+    const levels: LevelName[] = [
       'error'
       , 'warn'
       , 'info'
@@ -100,7 +100,10 @@ class BrologComponent {
   declarations: [ BrologComponent ],
   bootstrap:    [ BrologComponent ],
   providers: [
-    {provide: Brolog, useClass: Brolog('verbose')},
+    {
+      provide: Brolog, 
+      useFactory: function brologFactory() { return Brolog.instance('verbose') }
+    },
   ],
 })
 export class BrologModule {}
