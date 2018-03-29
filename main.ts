@@ -14,7 +14,7 @@ import { BrowserModule }          from '@angular/platform-browser'
  */
 import { 
   Brolog,
-  LevelName,
+  LogLevel,
 } from 'brolog'
 
 @Component({
@@ -64,7 +64,7 @@ class BrologComponent {
       'raw Brolog':       Brolog,
     }
     
-    const levels: LevelName[] = [
+    const levels: LogLevel[] = [
       'error'
       , 'warn'
       , 'info'

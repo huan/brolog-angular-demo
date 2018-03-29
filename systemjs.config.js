@@ -31,7 +31,7 @@
     },
     // map tells the System loader where to look for things
     map: {
-      brolog: 'node_modules/brolog/dist/brolog.js',
+      brolog: 'node_modules/brolog/bundles/brolog.umd.js',
 
       // angular bundles
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
