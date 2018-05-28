@@ -26,9 +26,11 @@
   "author": "Huan LI <zixia@zixia.net>",
   "license": "ISC",
   "devDependencies": {
+    "@angular/core": "^6.0.3",
+    "@angular/platform-browser": "^6.0.3",
+    "@angular/platform-browser-dynamic": "^6.0.3",
+    "brolog": "^1.4.9",
     "lite-server": "^2.3.0"
   },
-  "dependencies": {
-    "brolog": "^0.4.1"
-  }
+  "dependencies": {}
 }

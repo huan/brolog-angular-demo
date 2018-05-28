@@ -14,8 +14,9 @@ import { BrowserModule }          from '@angular/platform-browser'
  */
 import { 
   Brolog,
-  LogLevel,
-} from 'brolog'
+  LogLevelName,
+  log,
+}                 from 'brolog'
 
 @Component({
   selector:     'brolog-app',
@@ -59,12 +60,14 @@ class BrologComponent {
 
     console.log('######### Start BroLog Test #########')
 
-    const loggerList: {[name:string]: Brolog} = {
+    const loggerList: {
+      [name:string]: Brolog | typeof Brolog
+    } = {
       'injected Brolog':  this.log,
       'raw Brolog':       Brolog,
     }
     
-    const levels: LogLevel[] = [
+    const levels: LogLevelName[] = [
       'error'
       , 'warn'
       , 'info'
@@ -85,7 +88,7 @@ class BrologComponent {
 
   }
 
-  doLog(logger: Brolog, loggerName: string) {
+  doLog(logger: Brolog | typeof Brolog, loggerName: string) {
     logger.error('LogApp', 'error messsage from %s', loggerName)
     logger.warn('LogApp', 'warn message from %s', loggerName)
     logger.info('LogApp', 'info message from %s', loggerName)
